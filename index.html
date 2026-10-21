@@ -1,4 +1,3 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!DOCTYPE html>
 <!-- saved from url=(0123)file:///C:/Users/isabela.brito/Downloads/Metas%20por%20categoria%20%E2%80%93%20indicadores%20de%20qualidade%20da%20eSF.html -->
 <html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -125,6 +124,14 @@ var G=[
 ["14 a 69 anos: 1 atendimento sobre saúde sexual e reprodutiva nos últimos 12 meses","em","","Registrar no bloco Avaliação um CID-10/CIAP-2 de saúde sexual ou reprodutiva (por exemplo, contracepção)"],
 ["50 a 69 anos: 1 exame de rastreamento do câncer de mama solicitado ou avaliado nos últimos 24 meses","em","","Solicitar: Plano > Solicitação de exames. Avaliar: Objetivo > Resultado de exames, com resultado e data."]]}
 ];
+var VDPE="Peso e altura juntos, nos campos próprios da Ficha de Visita domiciliar e territorial (CDS ou e-SUS Território), preenchendo Motivo da visita e Acompanhamento";
+var VDPA="Pressão arterial, nos campos próprios da Ficha de Visita domiciliar e territorial (CDS ou e-SUS Território), preenchendo Motivo da visita e Acompanhamento";
+var ET="Escuta inicial/Pré-atendimento (qualquer nível)";
+function how(x,f){
+  if(f==="a"){ if(x[3]===PA)return VDPA; if(x[3]===PE)return VDPE; }
+  if(f==="t"&&(x[3]===PA||x[3]===PE))return ET;
+  return x[3];
+}
 var root=document.getElementById("root");
 function render(f){
   var h="";
@@ -137,7 +144,7 @@ function render(f){
     rows.forEach(function(x){
       var ks=f?[f]:x[1].split("");
       var c=ks.map(function(k){return '<span class="chip">'+L[k]+'</span>';}).join("");
-      h+='<tr><td>'+x[0]+'</td><td>'+c+(x[2]&&!f?'<span class="x">'+x[2]+'</span>':'')+'</td><td>'+x[3]+'</td></tr>';
+      h+='<tr><td>'+x[0]+'</td><td>'+c+(x[2]&&!f?'<span class="x">'+x[2]+'</span>':'')+'</td><td>'+how(x,f)+'</td></tr>';
     });
     h+='</tbody></table></div></section>';
   });
@@ -153,5 +160,4 @@ document.querySelectorAll("button[data-f]").forEach(function(b){
 </script>
 
 
-</body></html>
 </body></html>
